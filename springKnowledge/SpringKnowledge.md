@@ -5,17 +5,47 @@
 2. Config Management
 3. Class Management
 
+>> We need not create object of classes, Spring is going to create for us -> using dependency injection
+> Ensure that objects created are in mentioned order as well as dependencies are also injected on your behalf
 All above are part of Spring core
 
+> Spring follows lots of plug and play
+We just need to configure it using configure file
+> 
+
+
+#### Spring Boot:
+
+> Provides an opinionated view on setting up Spring project
+> Spring boot made it easy for us to get started to use Spring projects
+> Automatically kickstart projects with sensitive defaults
+> Spring makes it easy for override it
+
+![img_10.png](img_10.png)
+
+Let's see some architecture diagrams from some famous websites
 ![img_6.png](img_6.png)
 
 
 ![img_7.png](img_7.png)
 
 
+##### Why inversion control ?
+Instead of us passing dependencies, framework(Spring) is managing for us.
+
+##### Config management :
+
+We can configure profiles using `application.properties` and `application-prod.properties`
 
 ![img_8.png](img_8.png)
 
+
+
+### Suite of Spring Projects:
+Spring has lots of projects which can be integrated with our application seamlessly
+
+
+![img_9.png](img_9.png)
 
 ## Spring IoC Container and Beans
 
