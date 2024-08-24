@@ -1,3 +1,22 @@
+## Spring Framework
+
+3 important features : 
+1. Dependency Injection
+2. Config Management
+3. Class Management
+
+All above are part of Spring core
+
+![img_6.png](img_6.png)
+
+
+![img_7.png](img_7.png)
+
+
+
+![img_8.png](img_8.png)
+
+
 ## Spring IoC Container and Beans
 
 Dependency injection (DI) is a specialized form of IoC, whereby objects define their dependencies (that is, the other objects they work with) only through:
