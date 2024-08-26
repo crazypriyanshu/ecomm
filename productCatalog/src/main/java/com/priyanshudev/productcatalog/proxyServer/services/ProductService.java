@@ -1,5 +1,6 @@
 package com.priyanshudev.productcatalog.proxyServer.services;
 
+import com.priyanshudev.productcatalog.proxyServer.dtos.ProxyCreateProductDto;
 import com.priyanshudev.productcatalog.proxyServer.models.Product;
 import org.springframework.stereotype.Service;
 
@@ -7,12 +8,7 @@ import org.springframework.stereotype.Service;
 public interface ProductService {
     Product getSingleProduct(Long id);
 
-    Product addNewProduct(Long productId,
-                             String title,
-                             double price,
-                             String description,
-                             String category,
-                             String imageUrl);
+    ProxyCreateProductDto addNewProduct(ProxyCreateProductDto product);
 
 
     // Product object has only those fields that needs to be updated

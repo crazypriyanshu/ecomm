@@ -1,5 +1,6 @@
 package com.priyanshudev.productcatalog.proxyServer.services;
 
+import com.priyanshudev.productcatalog.proxyServer.dtos.ProxyCreateProductDto;
 import com.priyanshudev.productcatalog.proxyServer.dtos.ProxyProductDto;
 import com.priyanshudev.productcatalog.proxyServer.models.Category;
 import com.priyanshudev.productcatalog.proxyServer.models.Product;
@@ -47,8 +48,19 @@ public class proxyServiceImpl implements ProductService {
 
 
     @Override
-    public Product addNewProduct(Long productId, String title, double price, String description, String category, String imageUrl) {
-        return null;
+    public ProxyCreateProductDto addNewProduct(ProxyCreateProductDto product) {
+        RestTemplate restTemplate = restTemplateBuilder.build();
+        ResponseEntity<ProxyCreateProductDto> response = restTemplate.postForEntity("https://api.escuelajs.co/api/v1/products", product, ProxyCreateProductDto.class);
+        ProxyCreateProductDto productDto = response.getBody();
+        Product newProduct = new Product();
+        product.setTitle(productDto.getTitle());
+        product.setDescription(productDto.getDescription());
+        product.setPrice(productDto.getPrice());
+        product.setImages(productDto.getImages());
+        product.setId(productDto.getId());
+        product.setCategoryName(productDto.getCategoryName());
+        return product;
+
     }
 
 

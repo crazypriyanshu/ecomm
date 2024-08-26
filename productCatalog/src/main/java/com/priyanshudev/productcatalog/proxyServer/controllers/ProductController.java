@@ -1,6 +1,8 @@
 package com.priyanshudev.productcatalog.proxyServer.controllers;
 
 import com.priyanshudev.productcatalog.proxyServer.dtos.GetSingleProductResponseDto;
+import com.priyanshudev.productcatalog.proxyServer.dtos.ProxyCreateProductDto;
+import com.priyanshudev.productcatalog.proxyServer.dtos.ProxyProductDto;
 import com.priyanshudev.productcatalog.proxyServer.models.Product;
 import com.priyanshudev.productcatalog.proxyServer.services.ProductService;
 import org.springframework.http.HttpStatus;
@@ -22,7 +24,7 @@ public class ProductController {
 
     @GetMapping("/")
     public String root(){
-        return "Hello World";
+        return "Hello From home page";
 
     }
 
@@ -33,6 +35,15 @@ public class ProductController {
         headers.add("TC", "24");
         ResponseEntity<Product> responseEntity = new ResponseEntity(productService.getSingleProduct(id), headers, HttpStatus.OK);
         return responseEntity;
+    }
+
+    @PostMapping("/product")
+    public ResponseEntity<ProxyCreateProductDto> addProduct(@RequestBody ProxyCreateProductDto product) {
+        ProxyCreateProductDto newProduct = productService.addNewProduct(product);
+
+        ResponseEntity<Product> response = new ResponseEntity(newProduct, HttpStatus.CREATED);
+        return new ResponseEntity(newProduct, HttpStatus.CREATED);
+
     }
 
 }
