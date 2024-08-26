@@ -1,4 +1,4 @@
-package com.priyanshudev.productcatalog.models;
+package com.priyanshudev.productcatalog.proxyServer.models;
 
 import lombok.Getter;
 import lombok.Setter;
