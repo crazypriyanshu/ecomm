@@ -14,7 +14,7 @@ public class ProxyProductDto {
     private Long id;
     private String title;
     private String description;
-    private int price;
+    private Double price;
     private Date creationAt;
     private Date updatedAt;
     private String[] images;

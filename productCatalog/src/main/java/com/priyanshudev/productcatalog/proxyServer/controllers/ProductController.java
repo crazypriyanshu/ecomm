@@ -12,6 +12,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -43,6 +44,13 @@ public class ProductController {
 
         ResponseEntity<Product> response = new ResponseEntity(newProduct, HttpStatus.CREATED);
         return new ResponseEntity(newProduct, HttpStatus.CREATED);
+
+    }
+
+    @GetMapping("/products")
+    public ResponseEntity<List<Product>> getAllProducts() {
+        ResponseEntity<List<Product>> responseEntity = new ResponseEntity(productService.getAllProducts(), HttpStatus.OK);
+        return responseEntity;
 
     }
 
