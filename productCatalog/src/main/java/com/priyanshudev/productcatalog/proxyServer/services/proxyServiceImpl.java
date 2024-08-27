@@ -128,6 +128,25 @@ public class proxyServiceImpl implements ProductService {
         return products;
     }
 
+    private Product convertProxyProductDtoToProduct(ProxyProductDto proxyProductDto) {
+        Product product = new Product();
+        product.setId(proxyProductDto.getId());
+        product.setTitle(proxyProductDto.getTitle());
+        product.setDescription(proxyProductDto.getDescription());
+        product.setPrice(proxyProductDto.getPrice());
+        product.setImageUrl(proxyProductDto.getImages());
+        product.setProductId(proxyProductDto.getId());
+        product.setCreatedAt(proxyProductDto.getCreationAt());
+        product.setLastUpdatedAt(proxyProductDto.getUpdatedAt());
+        Category category = new Category();
+        category.setName(proxyProductDto.getCategory().getName());
+        category.setId(proxyProductDto.getCategory().getId());
+        category.setCreatedAt(proxyProductDto.getCategory().getCreationAt());
+        category.setLastUpdatedAt(proxyProductDto.getCategory().getUpdatedAt());
+        product.setCategory(category);
+        return product;
+    }
+
 
     @Override
     public ProxyCreateProductDto addNewProduct(ProxyCreateProductDto product) {
