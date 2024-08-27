@@ -13,11 +13,10 @@ import java.util.Date;
 public class ProxyProductDto {
     private Long id;
     private String title;
+    private int price;
     private String description;
-    private Double price;
+    private String[] images;
     private Date creationAt;
     private Date updatedAt;
-    private String[] images;
     private ProxyCategoryDto category;
-    private Long categoryId;
 }

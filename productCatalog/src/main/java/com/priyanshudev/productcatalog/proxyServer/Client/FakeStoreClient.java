@@ -29,8 +29,8 @@ public class FakeStoreClient {
     }
 
 
-    Optional<ProxyProductDto> getSingleProduct(Long id) throws NotFoundException {
-
-
-    }
+//    Optional<ProxyProductDto> getSingleProduct(Long id) throws NotFoundException {
+//
+//
+//    }
 }

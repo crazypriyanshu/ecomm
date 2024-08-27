@@ -5,4 +5,4 @@ Return Type of Service ? Can service return models -> still okay, **but controll
 After version 1:
 
 Service -> Model -> Controllers -> Dtos
-meaning service can send Models as response to Controllers but controller should
+meaning service can send Models as response to Controllers but controller should be sending out DTO's only to client

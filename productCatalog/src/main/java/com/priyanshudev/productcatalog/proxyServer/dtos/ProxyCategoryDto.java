@@ -7,9 +7,9 @@ import java.util.Date;
 @Getter
 @Setter
 public class ProxyCategoryDto {
-    private Long id;
+    private int id;
     private String name;
     private String image;
-    private Date creationAt;
-    private Date updatedAt;
+    private String creationAt;
+    private String updatedAt;
 }
