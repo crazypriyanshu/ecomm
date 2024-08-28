@@ -1,4 +1,4 @@
-package com.priyanshudev.productcatalog.proxyServer.dtos;
+package com.priyanshudev.productcatalog.proxyServer.Client.fakeStoreApi;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,12 +9,13 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
-public class ProxyCreateProductDto {
+public class ProxyProductDto {
     private Long id;
     private String title;
     private int price;
     private String description;
-    private int categoryId;
     private String[] images;
-    private String categoryName;
+    private Date creationAt;
+    private Date updatedAt;
+    private ProxyCategoryDto category;
 }

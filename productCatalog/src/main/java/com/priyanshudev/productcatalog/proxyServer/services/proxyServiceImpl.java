@@ -1,7 +1,8 @@
 package com.priyanshudev.productcatalog.proxyServer.services;
 
-import com.priyanshudev.productcatalog.proxyServer.dtos.ProxyCreateProductDto;
-import com.priyanshudev.productcatalog.proxyServer.dtos.ProxyProductDto;
+import com.priyanshudev.productcatalog.proxyServer.Client.fakeStoreApi.FakeStoreClient;
+import com.priyanshudev.productcatalog.proxyServer.Client.fakeStoreApi.ProxyCreateProductDto;
+import com.priyanshudev.productcatalog.proxyServer.Client.fakeStoreApi.ProxyProductDto;
 import com.priyanshudev.productcatalog.proxyServer.exceptions.NotFoundException;
 import com.priyanshudev.productcatalog.proxyServer.models.Category;
 import com.priyanshudev.productcatalog.proxyServer.models.Product;
@@ -12,20 +13,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.*;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Service
 public class proxyServiceImpl implements ProductService {
     private RestTemplateBuilder restTemplateBuilder;
+    private FakeStoreClient fakeStoreClient;
 
-    public proxyServiceImpl(RestTemplateBuilder restTemplateBuilder) {
+    public proxyServiceImpl(RestTemplateBuilder restTemplateBuilder,
+                            FakeStoreClient fakeStoreClient) {
         this.restTemplateBuilder = restTemplateBuilder;
+        this.fakeStoreClient = fakeStoreClient;
     }
 
     public <T> ResponseEntity<T> requestForEntity(String url,HttpMethod method, @Nullable Object request,
@@ -44,11 +45,7 @@ public class proxyServiceImpl implements ProductService {
     public Optional<Product> getSingleProduct(Long id) throws NotFoundException {
         ProxyProductDto productDto = null;
         try {
-            RestTemplate restTemplate = restTemplateBuilder.build();
-            ResponseEntity<ProxyProductDto> response = restTemplate.getForEntity(
-                    "https://api.escuelajs.co/api/v1/products/{id}",
-                    ProxyProductDto.class, id);
-            productDto = response.getBody();
+            productDto = fakeStoreClient.getSingleProduct(id);
             
         } catch (HttpClientErrorException.BadRequest e) {
             throw new RestClientException("Bad Request: "+ e.getMessage());
@@ -75,14 +72,9 @@ public class proxyServiceImpl implements ProductService {
 
     @Override
     public List<Product> getAllProducts() throws NotFoundException {
-        Date date = null;
-        RestTemplate restTemplate = restTemplateBuilder.build();
-        ResponseEntity<ProxyProductDto[]> response = restTemplate.getForEntity(
-                "https://api.escuelajs.co/api/v1/products",
-                ProxyProductDto[].class
-        );
+        List<ProxyProductDto> response = fakeStoreClient.getAllProducts();
         List<Product> products = new ArrayList<>();
-        for (ProxyProductDto dto : response.getBody()) {
+        for (ProxyProductDto dto : response) {
             products.add(convertProxyProductDtoToProduct(dto));
         }
         return products;
@@ -116,39 +108,28 @@ public class proxyServiceImpl implements ProductService {
 
     @Override
     public Product addNewProduct(ProxyCreateProductDto product) throws NotFoundException {
-        RestTemplate restTemplate = restTemplateBuilder.build();
-        ResponseEntity<ProxyProductDto> response = restTemplate.postForEntity(
-                "https://api.escuelajs.co/api/v1/products",
-                product, ProxyProductDto.class);
-        ProxyProductDto productDto = response.getBody();
 
+        ProxyProductDto productDto = fakeStoreClient.addNewProduct(product);
         return convertProxyProductDtoToProduct(productDto);
 
     }
 
     @Override
     public Product updateProduct(Long id, ProxyProductDto product) throws NotFoundException {
-        RestTemplate restTemplate = restTemplateBuilder.build();
-        ResponseEntity<ProxyProductDto> response =  requestForEntity(
-                "https://api.escuelajs.co/api/v1/products/{id}",
-                HttpMethod.PUT,
-                product,
-                ProxyProductDto.class,
-                id
-        );
-        return convertProxyProductDtoToProduct(response.getBody());
+        ProxyProductDto updatedProduct = fakeStoreClient.updateProduct(id, product);
+        return convertProxyProductDtoToProduct(updatedProduct);
     }
 
     @Override
     public boolean deleteProduct(Long id) {
-        RestTemplate restTemplate = restTemplateBuilder.build();
+        boolean isDeleted = false;
         try {
-            restTemplate.delete("http://api.escuelajs.co/api/v1/products/{id}", id);
-            return true;
+            isDeleted = fakeStoreClient.deleteProduct(id);
+
         } catch (RestClientException e) {
             System.err.println("Error occurred while deleting the product with id "+id+" "+e.getMessage());
-            return false;
         }
+        return isDeleted;
     }
     }
 

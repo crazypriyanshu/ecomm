@@ -1,9 +1,8 @@
 package com.priyanshudev.productcatalog.proxyServer.controllers;
 
 import com.priyanshudev.productcatalog.proxyServer.dtos.ErrorResponseDto;
-import com.priyanshudev.productcatalog.proxyServer.dtos.GetSingleProductResponseDto;
-import com.priyanshudev.productcatalog.proxyServer.dtos.ProxyCreateProductDto;
-import com.priyanshudev.productcatalog.proxyServer.dtos.ProxyProductDto;
+import com.priyanshudev.productcatalog.proxyServer.Client.fakeStoreApi.ProxyCreateProductDto;
+import com.priyanshudev.productcatalog.proxyServer.Client.fakeStoreApi.ProxyProductDto;
 import com.priyanshudev.productcatalog.proxyServer.exceptions.NotFoundException;
 import com.priyanshudev.productcatalog.proxyServer.models.Product;
 import com.priyanshudev.productcatalog.proxyServer.services.ProductService;
@@ -13,9 +12,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -36,8 +33,13 @@ public class ProductController {
     public ResponseEntity<Optional<Product>> getProductById(@PathVariable Long id) throws NotFoundException {
         MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
         headers.add("con", "priyanshu-proxy-server-application");
-
-        Optional<Product> productOptional = productService.getSingleProduct(id);
+        Optional<Product> productOptional;
+        try {
+            productOptional = productService.getSingleProduct(id);
+        }
+        catch (Exception e) {
+            throw e;
+        }
         if (productOptional.isEmpty()) {
             throw new NotFoundException(" No product found with id: "+id);
 
