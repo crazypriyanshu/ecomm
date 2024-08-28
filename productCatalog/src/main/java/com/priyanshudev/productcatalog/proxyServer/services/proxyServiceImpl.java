@@ -47,16 +47,6 @@ public class proxyServiceImpl implements ProductService {
         try {
             productDto = fakeStoreClient.getSingleProduct(id);
             
-        } catch (HttpClientErrorException.BadRequest e) {
-            throw new RestClientException("Bad Request: "+ e.getMessage());
-        }
-        catch (HttpClientErrorException.NotFound e) {
-            System.out.println("Not Found: "+ e.getMessage());
-            return null;
-        }
-        catch (HttpClientErrorException e) {
-            System.out.println("Client Error: "+ e.getMessage());
-            throw new RestClientException("Internal Server Error: "+ e.getMessage());
         }
         catch (Exception e) {
             e.printStackTrace();
