@@ -1,9 +1,9 @@
-package com.priyanshudev.productcatalog.proxyServer.services;
+package com.priyanshudev.productcatalog.services;
 
 import com.priyanshudev.productcatalog.proxyServer.Client.fakeStoreApi.ProxyCreateProductDto;
 import com.priyanshudev.productcatalog.proxyServer.Client.fakeStoreApi.ProxyProductDto;
-import com.priyanshudev.productcatalog.proxyServer.exceptions.NotFoundException;
-import com.priyanshudev.productcatalog.proxyServer.models.Product;
+import com.priyanshudev.productcatalog.exceptions.NotFoundException;
+import com.priyanshudev.productcatalog.models.Product;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

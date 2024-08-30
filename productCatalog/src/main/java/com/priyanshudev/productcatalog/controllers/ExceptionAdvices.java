@@ -1,7 +1,7 @@
-package com.priyanshudev.productcatalog.proxyServer.controllers;
+package com.priyanshudev.productcatalog.controllers;
 
-import com.priyanshudev.productcatalog.proxyServer.dtos.ErrorResponseDto;
-import com.priyanshudev.productcatalog.proxyServer.exceptions.NotFoundException;
+import com.priyanshudev.productcatalog.proxyServer.Client.fakeStoreApi.ErrorResponseDto;
+import com.priyanshudev.productcatalog.exceptions.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

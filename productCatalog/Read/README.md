@@ -228,3 +228,5 @@ session.save(emp);
 }`
 Note that this also works for any superclass or interface, whether it’s a @MappedSuperclass or not. The difference from a usual HQL query is that we have to use the fully qualified name since they are not Hibernate-managed entities.
 
+Application -> JPA interface -> Hibernate -> JDBC -> MySQL
+

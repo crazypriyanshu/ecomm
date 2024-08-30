@@ -1,4 +1,4 @@
-package com.priyanshudev.productcatalog.proxyServer.dtos;
+package com.priyanshudev.productcatalog.proxyServer.Client.fakeStoreApi;
 
 import lombok.Getter;
 import lombok.Setter;

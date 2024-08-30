@@ -1,11 +1,11 @@
-package com.priyanshudev.productcatalog.proxyServer.services;
+package com.priyanshudev.productcatalog.services;
 
 import com.priyanshudev.productcatalog.proxyServer.Client.fakeStoreApi.FakeStoreClient;
 import com.priyanshudev.productcatalog.proxyServer.Client.fakeStoreApi.ProxyCreateProductDto;
 import com.priyanshudev.productcatalog.proxyServer.Client.fakeStoreApi.ProxyProductDto;
-import com.priyanshudev.productcatalog.proxyServer.exceptions.NotFoundException;
-import com.priyanshudev.productcatalog.proxyServer.models.Category;
-import com.priyanshudev.productcatalog.proxyServer.models.Product;
+import com.priyanshudev.productcatalog.exceptions.NotFoundException;
+import com.priyanshudev.productcatalog.models.Category;
+import com.priyanshudev.productcatalog.models.Product;
 import jakarta.annotation.Nullable;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpMethod;
@@ -79,12 +79,10 @@ public class proxyServiceImpl implements ProductService {
         product.setTitle(dto.getTitle());
         product.setDescription(dto.getDescription());
         product.setPrice(product.getPrice());
-        product.setImageUrl(dto.getImages());
-        product.setProductId(dto.getId());
+//        product.setImageUrl(dto.getImages());
         Category category = new Category();
         category.setId(Long.valueOf(dto.getCategory().getId()));
         category.setName(dto.getCategory().getName());
-        category.setImage(dto.getCategory().getImage());
         String categoryCreationDate = dto.getCategory().getCreationAt();
         String categoryUpdatedDate = dto.getCategory().getUpdatedAt();
         LocalDateTime localDateTimeCategoryCreationAt = LocalDateTime.parse(categoryCreationDate.substring(0, categoryCreationDate.length() - 1), DateTimeFormatter.ISO_LOCAL_DATE_TIME);

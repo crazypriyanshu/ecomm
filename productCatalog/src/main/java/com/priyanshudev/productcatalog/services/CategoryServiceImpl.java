@@ -1,4 +1,4 @@
-package com.priyanshudev.productcatalog.proxyServer.services;
+package com.priyanshudev.productcatalog.services;
 
 
 public class CategoryServiceImpl implements CategoryService {

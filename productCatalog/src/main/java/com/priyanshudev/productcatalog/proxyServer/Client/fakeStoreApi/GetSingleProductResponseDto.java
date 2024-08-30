@@ -1,6 +1,6 @@
 package com.priyanshudev.productcatalog.proxyServer.Client.fakeStoreApi;
 
-import com.priyanshudev.productcatalog.proxyServer.models.Product;
+import com.priyanshudev.productcatalog.models.Product;
 import lombok.Getter;
 import lombok.Setter;
 

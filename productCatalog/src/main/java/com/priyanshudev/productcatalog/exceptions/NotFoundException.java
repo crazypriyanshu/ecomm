@@ -1,4 +1,4 @@
-package com.priyanshudev.productcatalog.proxyServer.exceptions;
+package com.priyanshudev.productcatalog.exceptions;
 
 public class NotFoundException extends Exception{
     public NotFoundException(String message){
